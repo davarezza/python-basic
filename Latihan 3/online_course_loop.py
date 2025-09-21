@@ -9,7 +9,6 @@ user_course1 = ""
 user_course2 = ""
 user_course3 = ""
 jumlah_course = 0
-
 max_courses = 3
 
 # loop untuk memilih kursus
@@ -76,7 +75,7 @@ while jumlah_course < max_courses:
     # pengkondisian pilihan kursus nomor 4
     elif pilihan == "4":
         # Pengecekan kuota apakah user sudah daftar
-        if web_dev_quota > 0 and not (user_course1 == "Grafik Desain" or user_course2 == "Grafik Desain" or user_course3 == "Grafik Desain"):
+        if grafis_desain_quota > 0 and not (user_course1 == "Grafik Desain" or user_course2 == "Grafik Desain" or user_course3 == "Grafik Desain"):
             jumlah_course += 1
             if user_course1 == "":
                 user_course1 = "Grafik Desain"
@@ -84,7 +83,7 @@ while jumlah_course < max_courses:
                 user_course2 = "Grafik Desain"
             else:
                 user_course3 = "Grafik Desain"
-            web_dev_quota -= 1
+            grafis_desain_quota -= 1
             print("Berhasil daftar di Grafik Desain")
         else:
             print("Gagal daftar (kuota penuh / sudah terdaftar)")
