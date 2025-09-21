@@ -19,15 +19,20 @@ while jumlah_course < max_courses:
     print(f"3. Web Development (tersisa {web_dev_quota})")
     print(f"4. Grafik Desain (tersisa {grafis_desain_quota})")
 
-    # input pilihan dan validasi berhenti
     pilihan = input("Pilih nomor kursus (atau ketik selesai): ")
     if pilihan.lower() == "selesai":
         break
 
-    # pengkondisian pilihan kursus nomor 1
+    # pengkondisian pilihan kursus nomor 1 (logikanya sama untuk pilihan 2, 3, dan 4)
     if pilihan == "1":
-        # Pengecekan kuota apakah user sudah daftar
-        if python_dasar_quota > 0 and not (user_course1 == "Python Dasar" or user_course2 == "Python Dasar" or user_course3 == "Python Dasar"):
+        # Cek apakah user sudah mengambil kursus ini sebelumnya
+        if user_course1 == "Python Dasar" or user_course2 == "Python Dasar" or user_course3 == "Python Dasar":
+            print("Gagal daftar: Kamu sudah mengambil Python Dasar sebelumnya.")
+        # Cek apakah kuota kursus sudah penuh
+        elif python_dasar_quota <= 0:
+            print("Gagal daftar: Kuota Python Dasar sudah penuh.")
+        # Jika lolos kedua pengecekan di atas, maka user bisa mendaftar
+        else:
             jumlah_course += 1
             if user_course1 == "":
                 user_course1 = "Python Dasar"
@@ -37,13 +42,14 @@ while jumlah_course < max_courses:
                 user_course3 = "Python Dasar"
             python_dasar_quota -= 1
             print("Berhasil daftar di Python Dasar")
-        else:
-            print("Gagal daftar (kuota penuh / sudah terdaftar)")
 
     # pengkondisian pilihan kursus nomor 2
     elif pilihan == "2":
-        # Pengecekan kuota apakah user sudah daftar
-        if data_science_quota > 0 and not (user_course1 == "Data Science" or user_course2 == "Data Science" or user_course3 == "Data Science"):
+        if user_course1 == "Data Science" or user_course2 == "Data Science" or user_course3 == "Data Science":
+            print("Gagal daftar: Kamu sudah mengambil Data Science sebelumnya.")
+        elif data_science_quota <= 0:
+            print("Gagal daftar: Kuota Data Science sudah penuh.")
+        else:
             jumlah_course += 1
             if user_course1 == "":
                 user_course1 = "Data Science"
@@ -53,13 +59,14 @@ while jumlah_course < max_courses:
                 user_course3 = "Data Science"
             data_science_quota -= 1
             print("Berhasil daftar di Data Science")
-        else:
-            print("Gagal daftar (kuota penuh / sudah terdaftar)")
 
     # pengkondisian pilihan kursus nomor 3
     elif pilihan == "3":
-        # Pengecekan kuota apakah user sudah daftar
-        if web_dev_quota > 0 and not (user_course1 == "Web Development" or user_course2 == "Web Development" or user_course3 == "Web Development"):
+        if user_course1 == "Web Development" or user_course2 == "Web Development" or user_course3 == "Web Development":
+            print("Gagal daftar: Kamu sudah mengambil Web Development sebelumnya.")
+        elif web_dev_quota <= 0:
+            print("Gagal daftar: Kuota Web Development sudah penuh.")
+        else:
             jumlah_course += 1
             if user_course1 == "":
                 user_course1 = "Web Development"
@@ -69,13 +76,14 @@ while jumlah_course < max_courses:
                 user_course3 = "Web Development"
             web_dev_quota -= 1
             print("Berhasil daftar di Web Development")
-        else:
-            print("Gagal daftar (kuota penuh / sudah terdaftar)")
 
     # pengkondisian pilihan kursus nomor 4
     elif pilihan == "4":
-        # Pengecekan kuota apakah user sudah daftar
-        if grafis_desain_quota > 0 and not (user_course1 == "Grafik Desain" or user_course2 == "Grafik Desain" or user_course3 == "Grafik Desain"):
+        if user_course1 == "Grafik Desain" or user_course2 == "Grafik Desain" or user_course3 == "Grafik Desain":
+            print("Gagal daftar: Kamu sudah mengambil Grafik Desain sebelumnya.")
+        elif grafis_desain_quota <= 0:
+            print("Gagal daftar: Kuota Grafik Desain sudah penuh.")
+        else:
             jumlah_course += 1
             if user_course1 == "":
                 user_course1 = "Grafik Desain"
@@ -85,18 +93,32 @@ while jumlah_course < max_courses:
                 user_course3 = "Grafik Desain"
             grafis_desain_quota -= 1
             print("Berhasil daftar di Grafik Desain")
-        else:
-            print("Gagal daftar (kuota penuh / sudah terdaftar)")
 
     else:
         print("Pilihan tidak valid.")
 
-    # Status pendaftaran
-    print("\nKursus yang sudah Anda ambil:")
+    # Status pendaftaran (langsung inline)
+    print("\nKursus yang sudah Kamu ambil:")
     if user_course1 != "":
         print("-", user_course1)
     if user_course2 != "":
         print("-", user_course2)
     if user_course3 != "":
         print("-", user_course3)
+    if jumlah_course == 0:
+        print("Belum ada kursus yang diambil.")
     print(f"Total: {jumlah_course}/{max_courses}")
+
+# Rangkuman pendaftaran
+print("\nRangkuman Pendaftaran")
+print("Kursus yang sudah Kamu ambil:")
+if user_course1 != "":
+    print("-", user_course1)
+if user_course2 != "":
+    print("-", user_course2)
+if user_course3 != "":
+    print("-", user_course3)
+if jumlah_course == 0:
+    print("Belum ada kursus yang diambil.")
+print(f"Total: {jumlah_course}/{max_courses}")
+print("Terima kasih sudah mengambil kursus kami.")
