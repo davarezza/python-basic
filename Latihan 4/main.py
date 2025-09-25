@@ -10,7 +10,7 @@ from task_manager import (
 
 def main():
     while True:
-        print("=== SISTEM MANAJEMEN TUGAS ===")
+        print("SISTEM MANAJEMEN TUGAS")
         print("1. Tambah Tugas")
         print("2. Lihat Semua Tugas")
         print("3. Tandai Tugas Selesai")
@@ -52,7 +52,7 @@ def main():
             lihat_statistik()
 
         elif pilihan == "0":
-            print("Terima kasih telah menggunakan program ini. Keluar...")
+            print("Terima kasih telah menggunakan program ini.")
             break
 
         else:
