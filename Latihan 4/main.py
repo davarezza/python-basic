@@ -1,8 +1,7 @@
-# main.py
 from task_manager import (
     tambah_tugas,
-    lihat_tugas,
-    tandai_selesai,
+    semua_tugas,
+    tandai_tugas_selesai,
     hapus_tugas,
     cari_tugas,
     lihat_statistik
@@ -21,36 +20,83 @@ def main():
 
         pilihan = input("Pilih menu: ")
 
+        # Tambah tugas
         if pilihan == "1":
             nama = input("Masukkan nama tugas: ")
-            tambah_tugas(nama)
+            tugas = tambah_tugas(nama)
+            print(f"Tugas '{tugas['nama']}' berhasil ditambahkan.\n")
 
+        # Lihat semua tugas
         elif pilihan == "2":
-            lihat_tugas()
+            semua = semua_tugas()
+            if not semua:
+                print("Belum ada tugas.\n")
+            else:
+                print("\nDaftar Tugas:")
+                for i, t in enumerate(semua, start=1):
+                    status = "Selesai" if t["selesai"] else "Belum"
+                    print(f"{i}. {t['nama']} - {status}")
+                print()
 
+        # Tandai tugas selesai
         elif pilihan == "3":
-            lihat_tugas()
+            semua = semua_tugas()
+            if not semua:
+                print("Belum ada tugas.\n")
+                continue
+            for i, t in enumerate(semua, start=1):
+                status = "Selesai" if t["selesai"] else "Belum"
+                print(f"{i}. {t['nama']} - {status}")
             try:
                 index = int(input("Masukkan nomor tugas yang ingin ditandai selesai: ")) - 1
-                tandai_selesai(index)
+                hasil = tandai_tugas_selesai(index)
+                if hasil:
+                    print(f"Tugas '{hasil['nama']}' berhasil ditandai selesai.\n")
+                else:
+                    print("Nomor tugas tidak valid.\n")
             except ValueError:
                 print("Input harus berupa angka.\n")
 
+        # Hapus tugas
         elif pilihan == "4":
-            lihat_tugas()
+            semua = semua_tugas()
+            if not semua:
+                print("Belum ada tugas.\n")
+                continue
+            for i, t in enumerate(semua, start=1):
+                status = "Selesai" if t["selesai"] else "Belum"
+                print(f"{i}. {t['nama']} - {status}")
             try:
                 index = int(input("Masukkan nomor tugas yang ingin dihapus: ")) - 1
-                hapus_tugas(index)
+                removed = hapus_tugas(index)
+                if removed:
+                    print(f"Tugas '{removed['nama']}' telah dihapus.\n")
+                else:
+                    print("Nomor tugas tidak valid.\n")
             except ValueError:
                 print("Input harus berupa angka.\n")
 
+        # Cari tugas
         elif pilihan == "5":
             keyword = input("Masukkan kata kunci pencarian: ")
-            cari_tugas(keyword)
+            hasil = cari_tugas(keyword)
+            if hasil:
+                print("\nHasil pencarian:")
+                for t in hasil:
+                    status = "Selesai" if t["selesai"] else "Belum"
+                    print(f"- {t['nama']} - {status}")
+            else:
+                print("Tidak ada tugas yang cocok.\n")
 
+        # Lihat statistik
         elif pilihan == "6":
-            lihat_statistik()
+            stats = lihat_statistik()
+            print("\nStatistik:")
+            print(f"Total tugas     : {stats['total']}")
+            print(f"Tugas selesai   : {stats['selesai']}")
+            print(f"Tugas belum     : {stats['belum']}\n")
 
+        # Keluar
         elif pilihan == "0":
             print("Terima kasih telah menggunakan program ini.")
             break
