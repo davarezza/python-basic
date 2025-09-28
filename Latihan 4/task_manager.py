@@ -1,4 +1,3 @@
-# task_manager.py
 tasks = []
 
 # Fungsi untuk menambah tugas baru
