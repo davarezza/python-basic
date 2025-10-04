@@ -39,8 +39,8 @@ def deteksi_lonjakan(penjualan, produk, bulan, persen=0.2):
     lonjakan = {}
     for i in range(len(penjualan)):
         data = penjualan[i]
-        rata2 = sum(data) / len(data)
-        ambang = rata2 * (1 + persen)
+        rata_rata = sum(data) / len(data)
+        ambang = rata_rata * (1 + persen)
         bulan_lonjakan = []
 
         for j in range(len(data)):
@@ -48,7 +48,7 @@ def deteksi_lonjakan(penjualan, produk, bulan, persen=0.2):
                 bulan_lonjakan.append((bulan[j], data[j]))
 
         lonjakan[produk[i]] = {
-            "Rata-rata": round(rata2, 2),
+            "Rata-rata": round(rata_rata, 2),
             "Ambang Batas": round(ambang, 2),
             "Lonjakan": bulan_lonjakan if bulan_lonjakan else "Tidak ada lonjakan signifikan"
         }
