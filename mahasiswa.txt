@@ -1,2 +1,2 @@
-250535618089,Dapva,Teknik Informatika
-250535617289,Anonimssi,Teknik Elektro
+2505356100,User 1,Teknik Informatika
+2505356300,User 3,Pendidikan Kimia
